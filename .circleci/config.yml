@@ -1,0 +1,18 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+    - image: ubuntu:20.04
+    steps:
+    - checkout
+    - run:
+        command: |
+          pushd packages/flutter;../../bin/flutter test --coverage -j 1;popd
+workflows:
+  coverage:
+    jobs:
+    - build:
+        filters:
+          branches:
+            only:
+            - master
